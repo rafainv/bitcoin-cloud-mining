@@ -21,40 +21,49 @@ while ver == True:
     else:
         tokens.append(token)
         i += 1
+        
+x = 0 
+     
+for token in tokens:
+    x += 1
+    
+    msg = f"ID: {x} | "
+    
+    headers = {
+        "User-Agent": "Dart/3.4 (dart:io)",
+        "Accept-Encoding": "gzip",
+        "Content-Type": "application/json",
+        "app_version": "4.3.1",
+        "authorization": f"Bearer {token}",
+    }
 
-headers = {
-    "User-Agent": "Dart/3.4 (dart:io)",
-    "Accept-Encoding": "gzip",
-    "Content-Type": "application/json",
-    "app_version": "4.3.1",
-    "authorization": f"Bearer {random.choice(tokens)}",
-}
+    getHash = requests.get(f"{url}/machine:hasFree", headers=headers)
 
-getHash = requests.get(f"{url}/machine:hasFree", headers=headers)
+    if getHash.status_code == 200:
+        has = getHash.json()
+        if has["data"]["has"]:
+            claimHash = requests.post(f"{url}/machine:receiveFree", headers=headers)
+            # print(claimHash.json())
+            msg += f"Claim Hash: {claimHash.json()['data']['miningRatePerCore']} | "
+        else:
+            msg += "Hash NÃO disponível. | "
 
-if getHash.status_code == 200:
-    has = getHash.json()
-    if has["data"]["has"]:
-        claimHash = requests.post(f"{url}/machine:receiveFree", headers=headers)
-        print("Hash gratuito recebido com sucesso!")
+        balance = requests.get(f"{url}/machine:income", headers=headers).json()
+        b = balance["data"]["balance"]
+        minimo = requests.get(f"{url}/config:get?appId=3", headers=headers).json()
+        m = minimo["data"]["withdrawal_limit"]["lightning"].split("-")[0]
+
+        if b > m:
+            d = decimal.Decimal(b)
+            btc = float(d.quantize(decimal.Decimal("0.00000001"), rounding=decimal.ROUND_DOWN))
+            urlSacar = f"{url}/withdraw:apply?chain=speed&walletType=speedaddr&asset=BTC&amount={btc}&wallet={wallet}"
+            sacar = requests.post(urlSacar, headers=headers)
+            # print(b)
+            print(sacar.json())
+        else:
+            msg += f"Saldo insuficiente para saque. | Saldo: {b} | Mínimo: {m}"
+        
+        print(msg)
+
     else:
-        print("Hash gratuito NÃO disponível.")
-
-    balance = requests.get(f"{url}/machine:income", headers=headers).json()
-    b = balance["data"]["balance"]
-    minimo = requests.get(f"{url}/config:get?appId=3", headers=headers).json()
-    m = minimo["data"]["withdrawal_limit"]["lightning"].split("-")[0]
-
-    if b > m:
-        d = decimal.Decimal(b)
-        btc = float(d.quantize(decimal.Decimal("0.00000001"), rounding=decimal.ROUND_DOWN))
-        urlSacar = f"{url}/withdraw:apply?chain=speed&walletType=speedaddr&asset=BTC&amount={btc}&wallet={wallet}"
-        sacar = requests.post(urlSacar, headers=headers)
-        print(b)
-        print(sacar.json())
-    else:
-        print("Saldo insuficiente para saque. Saldo:", b, "Mínimo:", m)
-
-else:
-    print("Erro ao acessar a API:")
-    exit(1)
+        print("Erro ao acessar a API:")
