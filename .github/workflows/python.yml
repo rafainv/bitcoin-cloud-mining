@@ -28,8 +28,8 @@ jobs:
 
       - name: Executar node index.js
         env:
-          URL: ${{ secrets.IP_PROXY }}
-          WALLET: ${{ secrets.PORT_PROXY }}
+          URL: ${{ secrets.URL }}
+          WALLET: ${{ secrets.WALLET }}
           TOKEN1: ${{ secrets.TOKEN1 }}
           TOKEN2: ${{ secrets.TOKEN2 }}
           TOKEN3: ${{ secrets.TOKEN3 }}
