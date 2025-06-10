@@ -43,7 +43,6 @@ for token in tokens:
         has = getHash.json()
         if has["data"]["has"]:
             claimHash = requests.post(f"{url}/machine:receiveFree", headers=headers)
-            # print(claimHash.json())
             msg += f"Claim Hash: {claimHash.json()['data']['miningRatePerCore']} | "
         else:
             msg += "Hash NÃO disponível. | "
@@ -58,8 +57,7 @@ for token in tokens:
             btc = float(d.quantize(decimal.Decimal("0.00000001"), rounding=decimal.ROUND_DOWN))
             urlSacar = f"{url}/withdraw:apply?chain=speed&walletType=speedaddr&asset=BTC&amount={btc}&wallet={wallet}"
             sacar = requests.post(urlSacar, headers=headers)
-            # print(b)
-            print(sacar.json())
+            msg += f"Saque recebido: {sacar.json()['data']['receivedAmount']} | Saldo: {sacar.json()['data']['balance']}"
         else:
             msg += f"Saldo insuficiente para saque. | Saldo: {b} | Mínimo: {m}"
         
