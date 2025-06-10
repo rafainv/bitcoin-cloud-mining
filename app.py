@@ -1,6 +1,5 @@
 import requests
 import decimal
-import random
 import os
 from dotenv import load_dotenv
 
