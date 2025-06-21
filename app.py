@@ -32,7 +32,7 @@ for token in tokens:
         "User-Agent": "Dart/3.4 (dart:io)",
         "Accept-Encoding": "gzip",
         "Content-Type": "application/json",
-        "app_version": "4.3.1",
+        "app_version": "4.4.2",
         "authorization": f"Bearer {token}",
     }
 
