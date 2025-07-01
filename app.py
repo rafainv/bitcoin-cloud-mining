@@ -7,6 +7,7 @@ load_dotenv()
 
 url = os.getenv("URL")
 wallet = os.getenv("WALLET")
+device_id = os.getenv("DEVICE_ID")
 
 tokens = []
 ver = True
@@ -32,8 +33,9 @@ for token in tokens:
         "User-Agent": "Dart/3.4 (dart:io)",
         "Accept-Encoding": "gzip",
         "Content-Type": "application/json",
-        "app_version": "4.4.2",
+        # "app_version": "4.4.5",
         "authorization": f"Bearer {token}",
+        "device_id": device_id,
     }
 
     getHash = requests.get(f"{url}/machine:hasFree", headers=headers)
