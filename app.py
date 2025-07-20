@@ -24,7 +24,6 @@ while ver == True:
 x = 0
 
 for token in tokens:
-    
     x += 1
 
     headers = {
