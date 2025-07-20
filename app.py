@@ -40,15 +40,13 @@ for token in tokens:
         response = requests.post(f"{url}/daily-reward", headers=headers)
 
         # 8 horas
-        response = requests.post(
-            f"{url}/free-mining-contract", headers=headers)
+        response = requests.post(f"{url}/free-mining-contract", headers=headers)
 
         # Ver Ads 24 horas 4.02 Gh/s
         payload = {
             "ecpm_tier": "FIVE",
         }
-        response = requests.post(
-            f"{url}/rewarded-mining-contract", data=payload, headers=headers)
+        response = requests.post(f"{url}/rewarded-mining-contract", data=payload, headers=headers)
 
         # Sacar
         response = requests.get(url, headers=headers)
