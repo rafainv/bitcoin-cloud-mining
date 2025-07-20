@@ -1,6 +1,4 @@
 import requests
-import decimal
-import random
 import json
 import os
 from dotenv import load_dotenv
@@ -9,7 +7,6 @@ load_dotenv()
 
 url = os.getenv("URL")
 wallet = os.getenv("WALLET")
-device_id = os.getenv("DEVICE_ID")
 
 tokens = []
 ver = True
@@ -32,14 +29,7 @@ for token in tokens:
     headers = {
         "User-Agent": "Dart/3.3 (dart:io)",
         "Accept-Encoding": "gzip",
-<<<<<<< HEAD
         "x-access-token": token,
-=======
-        "Content-Type": "application/json",
-        # "app_version": "4.4.5",
-        "authorization": f"Bearer {token}",
-        "device_id": device_id,
->>>>>>> abec68ae100493c48b10277aafbdba0018f68a51
     }
 
     response = requests.get(f"{url}/mining-contracts", headers=headers)
