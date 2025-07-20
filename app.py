@@ -10,6 +10,7 @@ wallet = os.getenv("WALLET")
 
 tokens = []
 ver = True
+
 i = 1
 
 while ver == True:
