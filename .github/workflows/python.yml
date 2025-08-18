@@ -35,6 +35,7 @@ jobs:
           TOKEN3: ${{ secrets.TOKEN3 }}
           TOKEN4: ${{ secrets.TOKEN4 }}
           TOKEN5: ${{ secrets.TOKEN5 }}
+          TOKEN6: ${{ secrets.TOKEN6 }}
         run: python app.py
         
       - name: Fazer upload da captura de tela
