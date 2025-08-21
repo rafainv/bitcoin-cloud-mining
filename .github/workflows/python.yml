@@ -43,6 +43,7 @@ jobs:
         run: |
           python app.py || echo "⚠️ app.py falhou"
           echo ""
+          echo ""
           echo "========== Outro app =========="
           echo ""
           python app2.py
