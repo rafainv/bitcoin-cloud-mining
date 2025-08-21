@@ -2,12 +2,11 @@ import requests
 import json
 import os
 
-url = os.getenv("URL")
+url = os.getenv("URL_A")
 wallet = os.getenv("WALLET")
 device_id = os.getenv("DEVICE_ID")
 lang_country = os.getenv("LANG_COUNTRY")
 token_A1 = os.getenv("TOKEN_A1")
-url_A = os.getenv("URL_A")
 
 headers = {
   'User-Agent': "okhttp/4.9.1",
