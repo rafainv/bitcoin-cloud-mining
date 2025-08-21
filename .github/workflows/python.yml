@@ -43,9 +43,9 @@ jobs:
         run: |
           python app.py || echo "⚠️ app.py falhou"
           echo ""
-          echo "$(tput setaf 4)########################################$(tput sgr0)"
-          echo "$(tput setaf 4)###           Outro app              ###$(tput sgr0)"
-          echo "$(tput setaf 4)########################################$(tput sgr0)"
+          echo "###############################"
+          echo "###        Outro app        ###"
+          echo "###############################"
           echo ""
           python app2.py
         
