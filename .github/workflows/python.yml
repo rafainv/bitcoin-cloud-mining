@@ -29,6 +29,9 @@ jobs:
       - name: Executar script Python
         env:
           URL: ${{ secrets.URL }}
+          URL_A: ${{ secrets.URL_A }}
+          DEVICE_ID: ${{ secrets.DEVICE_ID }}
+          LANG_COUNTRY: ${{ secrets.LANG_COUNTRY }}
           WALLET: ${{ secrets.WALLET }}
           TOKEN1: ${{ secrets.TOKEN1 }}
           TOKEN2: ${{ secrets.TOKEN2 }}
@@ -36,7 +39,11 @@ jobs:
           TOKEN4: ${{ secrets.TOKEN4 }}
           TOKEN5: ${{ secrets.TOKEN5 }}
           TOKEN6: ${{ secrets.TOKEN6 }}
-        run: python app.py
+          TOKEN_A1: ${{ secrets.TOKEN_A1 }}
+        run: |
+          python app.py
+          echo "\nOutro app\n"
+          python app2.py
         
       - name: Fazer upload da captura de tela
         if: success() || failure()
