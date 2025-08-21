@@ -41,8 +41,12 @@ jobs:
           TOKEN6: ${{ secrets.TOKEN6 }}
           TOKEN_A1: ${{ secrets.TOKEN_A1 }}
         run: |
-          python app.py
-          echo "\nOutro app\n"
+          python app.py || echo "⚠️ app.py falhou"
+          echo ""
+          echo "$(tput setaf 4)########################################$(tput sgr0)"
+          echo "$(tput setaf 4)###           Outro app              ###$(tput sgr0)"
+          echo "$(tput setaf 4)########################################$(tput sgr0)"
+          echo ""
           python app2.py
         
       - name: Fazer upload da captura de tela
